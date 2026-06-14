@@ -1,0 +1,42 @@
+# =========================
+# BUILD OUTPUTS
+# =========================
+build/
+*.exe
+*.out
+*.o
+*.obj
+
+# NÃO ignorar libs do projeto (raylib etc)
+# =========================
+# TEMP / CACHE
+# =========================
+*.log
+*.tmp
+*.temp
+*.d
+*.dep
+
+# =========================
+# VS CODE (KEEP IMPORTANT CONFIG)
+# =========================
+.vscode/*
+!.vscode/c_cpp_properties.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# IntelliSense / cache
+*.ipch
+*.pdb
+
+# =========================
+# OS FILES (WINDOWS)
+# =========================
+Thumbs.db
+Desktop.ini
+
+# =========================
+# OPTIONAL
+# =========================
+cmake-build-*/

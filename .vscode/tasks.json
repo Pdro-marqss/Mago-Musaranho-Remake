@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Debug Raylib",
+      "type": "shell",
+      "command": "gcc src/*.c -Ithird_party/raylib/desktop/include -Lthird_party/raylib/desktop/lib -lraylib -luser32 -lshell32 -lgdi32 -lmsvcrt -lwinmm -g -O0 -Wall -Wextra -o build/debug/jogo.exe",
+      "group": {
+        "kind": "build"
+      }
+    },
+    {
+      "label": "Build Release Raylib",
+      "type": "shell",
+      "command": "gcc src/*.c -Ithird_party/raylib/desktop/include -Lthird_party/raylib/desktop/lib -lraylib -lgdi32 -lopengl32 -lwinmm -O2 -DNDEBUG -Wall -Wextra -o build/release/jogo.exe",
+      "group": {
+        "kind": "build"
+      }
+    },
+    {
+      "label": "Build Web Release Raylib",
+      "type": "shell",
+      "command": "emcc src/main.c -Ithird_party/raylib/web/include -Lthird_party/raylib/web/lib -lraylib -s USE_GLFW=3 -s ASYNCIFY -s ALLOW_MEMORY_GROWTH=1 -DPLATFORM_WEB --shell-file third_party/raylib/web/shell.html -O2 -o build/web/index.html",
+      "group": {
+        "kind": "build"
+      }
+    }
+  ]
+}
