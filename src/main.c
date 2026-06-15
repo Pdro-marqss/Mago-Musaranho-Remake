@@ -24,7 +24,7 @@ int main(void) {
 
 
     // Loop
-    while (!WindowShouldClose()){
+    while (!WindowShouldClose() && !game.shouldExit){
         // Corrige o bug do alt+tab fullscreen
         if (!IsWindowFocused() && IsWindowFullscreen()) {
             MinimizeWindow();
@@ -66,14 +66,11 @@ int main(void) {
             );
 
             DrawText("W A S D para mover", 20, 20, 20, WHITE);
+            DrawFPS(20, 50);
 
-            DrawText(TextFormat("Monitor: %d x %d", GetScreenWidth(), GetScreenHeight()), 20, 50, 20, WHITE);
-
-            DrawText(TextFormat("Monitor fps: %d", monitorRefreshRate), 20, 80, 20, WHITE);
-
-            DrawText(TextFormat("Screen: %d x %d", GetScreenWidth(), GetScreenHeight()), 20, 110, 20, WHITE);
-
-            DrawFPS(20, 140);
+            // DrawText(TextFormat("Monitor: %d x %d", GetScreenWidth(), GetScreenHeight()), 20, 50, 20, WHITE);
+            // DrawText(TextFormat("Monitor fps: %d", monitorRefreshRate), 20, 80, 20, WHITE);
+            // DrawText(TextFormat("Screen: %d x %d", GetScreenWidth(), GetScreenHeight()), 20, 110, 20, WHITE);
 
         EndDrawing();
     }
