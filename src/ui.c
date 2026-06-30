@@ -22,10 +22,10 @@ void DrawButton(Button *b) {
     DrawRectangleRec(b->rect, color);
     DrawRectangleLinesEx(b->rect, 2, BLACK);
 
-    int textWidth = MeasureText(b->text, 20);
+    int textWidth = MeasureText(b->label, 20);
 
     DrawText(
-        b->text,
+        b->label,
         b->rect.x + (b->rect.width - textWidth) / 2,
         b->rect.y + 15,
         20,
@@ -34,31 +34,51 @@ void DrawButton(Button *b) {
 }
 
 
-void DrawTextAlignedInRect(const char *text, Rectangle rect, int fontSize, Color color, AlignTextMode mode) {
+void DrawTextAlignedInRect(const char *text, Rectangle rect, int fontSize, Color color, TextAlign align) {
     int textWidth = MeasureText(text, fontSize);
 
-    float x = rect.x;
-    float y = rect.y;
+    float x = rect.x + align.x;
+    float y = rect.y + align.y;
 
-    switch (mode) {
-        case ALIGN_CENTER_X:
-            x += (rect.width - textWidth) * 0.5f;
-            break;
-
-        case ALIGN_CENTER_Y:
-            y += (rect.height - fontSize) * 0.5f;
-            break;
-
-        case ALIGN_CENTER_BOTH:
-            x += (rect.width - textWidth) * 0.5f;
-            y += (rect.height - fontSize) * 0.5f;
-            break;
-
-        case ALIGN_NONE:
-        default:
-            break;
-    }
-
+    if (align.isCenterX) x = rect.x + (rect.width - textWidth) * 0.5f;
+    if (align.isCenterY) y = rect.y + (rect.height - fontSize) * 0.5f;
 
     DrawText(text, (int)x, (int)y, fontSize, color);
+}
+
+Rectangle CenterRectX(Rectangle rect, Rectangle container) {
+    rect.x = container.x + (container.width - rect.width) * 0.5f;
+    return rect;
+}
+
+Rectangle CenterRectY(Rectangle rect, Rectangle container) {
+    rect.y = container.y + (container.height - rect.height) * 0.5f;
+    return rect;
+}
+
+Rectangle CenterRect(Rectangle rect, Rectangle container) {
+    rect = CenterRectX(rect, container);
+    rect = CenterRectY(rect, container);
+
+    return rect;
+}
+
+Rectangle PlaceBelow(Rectangle rect, Rectangle reference, float spacing) {
+    rect.y = reference.y + reference.height + spacing;
+    return rect;
+}
+
+Rectangle PlaceAbove(Rectangle rect, Rectangle reference, float spacing) {
+    rect.y = reference.y - rect.height - spacing;
+    return rect;
+}
+
+Rectangle PlaceLeft(Rectangle rect, Rectangle reference, float spacing) {
+    rect.x = reference.x - rect.width - spacing;
+    return rect;
+}
+
+Rectangle PlaceRight(Rectangle rect, Rectangle reference, float spacing) {
+    rect.x = reference.x + reference.width + spacing;
+    return rect;
 }

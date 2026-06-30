@@ -9,8 +9,18 @@ void InitGame(Game *game) {
 
     InitPlayer(&game->player);
 
-    game->menu.playButton = (Button){ {540, 300, 200, 60}, "PLAY" };
-    game-> menu.exitButton = (Button){ {540, 380, 200, 60}, "EXIT" };
+    Rectangle screenRect = { 0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT};
+    Rectangle titleRect = { 0, 250, VIRTUAL_WIDTH, 40};
+
+    Rectangle playRect = { 0, 0, 200, 60};
+    playRect = CenterRectX(playRect, screenRect);
+    playRect = PlaceBelow(playRect, titleRect, 40);
+    game->menu.playButton = (Button){ playRect, "PLAY" };
+
+    Rectangle exitRect = { 0, 0, 200, 60};
+    exitRect = CenterRectX(exitRect, screenRect);
+    exitRect = PlaceBelow(exitRect, playRect, 20);
+    game-> menu.exitButton = (Button){ exitRect, "EXIT" };
 }
 
 
@@ -46,8 +56,12 @@ void DrawGame(Game *game) {
     switch(game->state) {
 
         case STATE_MENU:
-            // DrawText("MENU", 580, 200, 40, WHITE);
-            DrawTextAlignedInRect("MENU", (Rectangle){ 0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT }, 40, WHITE, ALIGN_CENTER_X);
+            DrawTextAlignedInRect(
+                "MUSARANHO REMAKE", 
+                (Rectangle){ 0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT}, 
+                40, 
+                WHITE, 
+                (TextAlign) {.isCenterX = true, .isCenterY = false, .y = 250});
 
             DrawButton(&game -> menu.playButton);
             DrawButton(&game -> menu.exitButton);
