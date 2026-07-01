@@ -42,8 +42,9 @@ void UpdateGame(Game *game, float dt) {
 
         case STATE_GAMEPLAY: 
             UpdatePlayer(&game->player, dt);
-            if (IsKeyPressed(KEY_SPACE)) game->state = STATE_MENU;
+            if (IsKeyPressed(KEY_ESCAPE)) game->state = STATE_MENU;
             break;
+            
 
 
         case STATE_GAMEOVER:

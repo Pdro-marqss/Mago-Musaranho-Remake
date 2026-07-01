@@ -7,8 +7,10 @@ int main(void) {
     SetConfigFlags( FLAG_WINDOW_HIGHDPI | FLAG_VSYNC_HINT | FLAG_WINDOW_UNDECORATED);
 
     InitWindow(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, GAME_NAME);
+    SetExitKey(KEY_NULL);
     SetTargetFPS(60);
     ToggleFullscreen();
+
     
     int monitor = GetCurrentMonitor();
     int monitorRefreshRate = GetMonitorRefreshRate(monitor);
